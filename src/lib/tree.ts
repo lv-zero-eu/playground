@@ -24,10 +24,10 @@ export class Node {
   toString() {
     if (this.indent < 0) return this.children.map(n => n.toString()).join("")
     return (
-      " ".repeat(this.indent) +
+      " ".repeat(this.indent) + // add indentation
       this.name +
-      "\n" +
-      this.children.map(n => n.toString()).join("")
+      "\n" + // add breakline for the children
+      this.children.map(n => n.toString()).join("") // add children
     )
   }
 
