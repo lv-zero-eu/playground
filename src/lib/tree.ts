@@ -3,6 +3,7 @@ export class Node {
   children: Node[] = []
   parent: Node | undefined = undefined;
   indent: number;
+  expanded = true
 
   constructor(name: string, indent?: number) {
     this.name = name;
@@ -14,6 +15,12 @@ export class Node {
     n.parent = this;
     return n
   }
+
+  toggleNode() {
+    this.expanded = !this.expanded
+    return this;
+  }
+
 }
 
 export const parseToTree = (s: string) => {

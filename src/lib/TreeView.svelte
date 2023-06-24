@@ -4,16 +4,17 @@
   export let tree: Node;
 </script>
 
-<ul class="tree" style={`--node-children:${tree.children.length}`}>
-  {#each tree.children as node}
-    <li>
-      <span>{node.name}</span>
-      {#if node.children}
+{#if tree.expanded && tree.children.length > 0}
+  <ul class="tree" style={`--node-children:${tree.children.length}`}>
+    {#each tree.children as node}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <li on:click|stopPropagation={() => (node = node.toggleNode())}>
+        <span>{node.name}</span>
         <svelte:self tree={node} />
-      {/if}
-    </li>
-  {/each}
-</ul>
+      </li>
+    {/each}
+  </ul>
+{/if}
 
 <style>
   .tree {
