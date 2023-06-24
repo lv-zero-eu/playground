@@ -8,8 +8,16 @@
   <ul class="tree" style={`--node-children:${tree.children.length}`}>
     {#each tree.children as node}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <li on:click|stopPropagation={() => (node = node.toggleNode())}>
-        <span>{node.name}</span>
+      <li>
+        <span
+          class:hasChildren={node.children.length}
+          on:click|stopPropagation={() => (node = node.toggleNode())}
+        >
+          {node.name}
+          {#if node.children.length}
+            <span class="labracket" class:closed={!node.expanded}>></span>
+          {/if}
+        </span>
         <svelte:self tree={node} />
       </li>
     {/each}
@@ -34,11 +42,35 @@
     padding-left: 5px;
   }
   li {
+    position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
     padding-left: 10px;
+    width: fit-content;
+  }
+  li > span {
+    cursor: default;
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  li > span.hasChildren {
+    cursor: pointer;
+  }
+  span.labracket {
+    transition: 0.3s;
+    transform: rotate(90deg);
+    padding: 0 2px;
+    color: rgb(104, 104, 104);
+  }
+  span.labracket.closed {
+    transform: rotate(-90deg);
   }
   li::before {
     position: absolute;
