@@ -21,6 +21,16 @@ export class Node {
     return this;
   }
 
+  toString() {
+    if (this.indent < 0) return this.children.map(n => n.toString()).join("")
+    return (
+      " ".repeat(this.indent) +
+      this.name +
+      "\n" +
+      this.children.map(n => n.toString()).join("")
+    )
+  }
+
 }
 
 export const parseToTree = (s: string) => {
@@ -53,6 +63,8 @@ export const parseToTree = (s: string) => {
     return root;
 
   })
+
+  console.log(root.toString())
 
   return root;
 }
