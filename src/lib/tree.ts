@@ -31,6 +31,18 @@ export class Node {
     )
   }
 
+  format(indent = 2) {
+    if (this.parent) {
+      this.indent = this.indent % indent != 0 ? this.indent - 1 : this.indent;
+      // Remove unnecessary indent
+      this.indent = this.parent.indent + indent < this.indent ? this.parent.indent + indent : this.indent
+      // Make sure that child has more indent
+      this.indent = this.parent.indent >= this.indent ? this.indent += indent : this.indent
+    }
+    this.children = this.children.map(n => n.format())
+    return this
+  }
+
 }
 
 export const parseToTree = (s: string) => {
@@ -63,8 +75,6 @@ export const parseToTree = (s: string) => {
     return root;
 
   })
-
-  console.log(root.toString())
 
   return root;
 }
