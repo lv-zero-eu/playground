@@ -1,18 +1,19 @@
 <script lang="ts">
   import type { Node } from "./tree";
+  import { fly } from "svelte/transition";
 
   export let tree: Node;
 </script>
 
 {#if tree.expanded && tree.children.length > 0}
-  <ul class="tree" style={`--node-children:${tree.children.length}`}>
-    {#each tree.children as node}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <li>
-        <span
-          class:hasChildren={node.children.length}
-          on:click|stopPropagation={() => (node = node.toggleNode())}
-        >
+  <ul class="tree">
+    {#each tree.children as node, i}
+      <li
+        in:fly={{ y: -20, duration: 200 * i, delay: 75 * i }}
+        out:fly={{ y: -20, duration: 200 * i, delay: 75 * i }}
+      >
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <span on:click|stopPropagation={() => (node = node.toggleNode())}>
           {node.name}
           {#if node.children.length}
             <span class="labracket" class:closed={!node.expanded}>></span>
@@ -60,7 +61,7 @@
     user-select: none; /* Standard syntax */
   }
 
-  li > span.hasChildren {
+  li:has(.labracket) > span {
     cursor: pointer;
   }
   span.labracket {
