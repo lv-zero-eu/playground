@@ -64,10 +64,9 @@
     cursor: pointer;
   }
   span.labracket {
-    transition: 0.3s;
+    transition: transform 0.3s;
     transform: rotate(90deg);
     padding: 0 2px;
-    color: rgb(104, 104, 104);
   }
   span.labracket.closed {
     transform: rotate(-90deg);
