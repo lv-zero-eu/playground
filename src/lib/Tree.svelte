@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
   import TreeView from "./TreeView.svelte";
   import { Node, parseToTree } from "./tree";
 
@@ -13,13 +12,7 @@ mnt`;
 
   let tree: Node = undefined;
 
-  onMount(() => {
-    tree = parseToTree(treeText);
-  });
-
-  afterUpdate(() => {
-    tree = parseToTree(treeText);
-  });
+  $: tree = parseToTree(treeText);
 </script>
 
 <div>
