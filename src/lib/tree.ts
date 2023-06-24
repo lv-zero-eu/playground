@@ -25,8 +25,9 @@ export const parseToTree = (s: string) => {
 
   s.split("\n").filter(s => s).forEach(line => {
     const indentation = line.search(/\S/); // Find the index of the first non-whitespace character
+    if (indentation === -1) return;
     const nodeName = line.trim();
-    const newNode = new Node(nodeName, indentation)
+    const newNode = new Node(nodeName, indentation);
 
 
     if (indentation > currentNode.indent) {
