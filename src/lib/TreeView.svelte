@@ -6,12 +6,9 @@
 </script>
 
 {#if tree.expanded && tree.children.length > 0}
-  <ul class="tree">
+  <ul class="tree" in:fly={{ y: -25, duration: 400 }}>
     {#each tree.children as node, i}
-      <li
-        in:fly={{ y: -20, duration: 200 * i, delay: 75 * i }}
-        out:fly={{ y: -20, duration: 200 * i, delay: 75 * i }}
-      >
+      <li>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span on:click|stopPropagation={() => (node = node.toggleNode())}>
           {node.name}
