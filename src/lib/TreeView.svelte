@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { Node } from "./tree";
   import { fly } from "svelte/transition";
+  import { quadInOut } from "svelte/easing";
 
   export let tree: Node;
 </script>
 
 {#if tree.expanded && tree.children.length > 0}
-  <ul class="tree" in:fly={{ y: -25, duration: 400 }}>
+  <ul
+    class="tree"
+    in:fly={{ x: 25, duration: 400, easing: quadInOut, opacity: 0.2 }}
+  >
     {#each tree.children as node, i}
       <li>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
