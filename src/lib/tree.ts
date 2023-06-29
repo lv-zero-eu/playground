@@ -69,6 +69,7 @@ export class Node {
         child.sortChildren(compareFn, true);
       }
     }
+    return this
   }
 
   getDescendants(): Node[] {
