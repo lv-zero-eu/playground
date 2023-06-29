@@ -28,6 +28,62 @@ export class Node {
     return n
   }
 
+  removeChild(node: Node) {
+    const index = this.children.indexOf(node);
+    if (index !== -1) {
+      const child = this.children.splice(index, 1)[0];
+      return child;
+    }
+  }
+
+  hasChildren(): boolean {
+    return this.children.length > 0;
+  }
+
+  getByName(name: string, deepSearch = false): Node | null {
+    if (this.name === name) {
+      return this;
+    }
+    const searchInChildren = (nodes: Node[]): Node | null => {
+      for (const child of nodes) {
+        if (child.name === name) {
+          return child;
+        }
+        if (deepSearch) {
+          const foundNode = searchInChildren(child.children);
+          if (foundNode) {
+            return foundNode;
+          }
+        }
+      }
+      return null;
+    };
+    return searchInChildren(this.children);
+  }
+
+  sortChildren(compareFn: (a: Node, b: Node) => number, deepSort = false) {
+    this.children.sort(compareFn);
+
+    if (deepSort) {
+      for (const child of this.children) {
+        child.sortChildren(compareFn, true);
+      }
+    }
+  }
+
+  getDescendants(): Node[] {
+    let descendants: Node[] = [];
+
+    const traverse = (node: Node) => {
+      descendants.push(node);
+      node.children.forEach(child => traverse(child));
+    };
+
+    this.children.forEach(child => traverse(child));
+
+    return descendants;
+  }
+
   toggleNode() {
     this.expanded = !this.expanded
     return this;
