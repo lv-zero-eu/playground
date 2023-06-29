@@ -6,7 +6,7 @@
   export let tree: Node;
 </script>
 
-{#if tree.expanded && tree.children.length > 0}
+{#if tree.expanded && tree.hasChildren()}
   <ul
     class="tree"
     in:fly={{ x: 25, duration: 400, easing: quadInOut, opacity: 0.2 }}
