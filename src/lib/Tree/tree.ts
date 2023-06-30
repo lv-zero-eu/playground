@@ -100,6 +100,19 @@ export class Node {
     )
   }
 
+  path() {
+    const pathSegments = [];
+    let currentNode: Node = this;
+
+    while (currentNode.parent) {
+      pathSegments.unshift(currentNode.name);
+      currentNode = currentNode.parent;
+    }
+    pathSegments.unshift("")
+
+    return pathSegments.join("/");
+  }
+
   format(indent = 2, level = 0) {
     if (this.parent)
       this.indent = level * indent - indent;
