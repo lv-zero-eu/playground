@@ -15,7 +15,7 @@ export class Node {
   expanded: boolean;
 
   constructor({ name, indent = 0, parent = null, expanded = true, children = [] }: NodeObject) {
-    this.name = name;
+    this.name = name.trim();
     this.indent = indent
     this.parent = parent
     this.expanded = expanded
@@ -90,16 +90,6 @@ export class Node {
     return this;
   }
 
-  toString(): string {
-    if (this.indent < 0) return this.children.map(n => n.toString()).join("")
-    return (
-      " ".repeat(this.indent) + // add indentation
-      this.name +
-      "\n" + // add breakline for the children
-      this.children.map(n => n.toString()).join("") // add children
-    )
-  }
-
   path() {
     const pathSegments = [];
     let currentNode: Node = this;
@@ -129,6 +119,36 @@ export class Node {
     });
     return new Node({ ...this, children: clonedChildren });
   }
+
+  toString(): string {
+    if (this.indent < 0) return this.children.map(n => n.toString()).join("")
+    return (
+      " ".repeat(this.indent) + // add indentation
+      this.name +
+      "\n" + // add breakline for the children
+      this.children.map(n => n.toString()).join("") // add children
+    )
+  }
+
+  toJson(): string {
+    const excludedProperties = ["parent"];
+    const json = JSON.stringify(this, (key, value) => {
+      if (excludedProperties.includes(key)) {
+        return undefined; // Exclude specified properties from serialization
+      }
+      return value;
+    });
+
+    return json;
+  }
+
+  toXML() {
+    const doc = document.implementation.createDocument(null, null, null);
+    const rootElement = buildXMLElement(doc, this);
+    doc.appendChild(rootElement);
+    return doc;
+  }
+
 }
 
 export const parseToTree = (s: string) => {
@@ -163,4 +183,20 @@ export const parseToTree = (s: string) => {
   })
 
   return root;
+}
+
+function sanitizeElementName(name) {
+  return name.replace(/[^a-zA-Z0-9-_]+/g, "");
+}
+
+function buildXMLElement(doc, node) {
+  const elementName = !node.parent && !sanitizeElementName(node.name) ? "root" : sanitizeElementName(node.name);
+  const element = doc.createElement(elementName);
+  element.setAttribute("indent", String(node.indent));
+  element.setAttribute("expanded", String(node.expanded));
+  for (const child of node.children) {
+    const childElement = buildXMLElement(doc, child);
+    element.appendChild(childElement);
+  }
+  return element;
 }
