@@ -24,7 +24,12 @@
 <div class="notifications">
   {#each notifications as notification (notification.id)}
     {#if notification.visible}
-      <div class="notification" transition:fly={{ x: 500, duration: 300 }}>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="notification"
+        transition:fly={{ x: 500, duration: 300 }}
+        on:click={() => (notification = notification.hide())}
+      >
         <span>{notification.message}</span>
       </div>
     {/if}

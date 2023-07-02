@@ -10,4 +10,9 @@ export class Notification {
     this.type = type;
     this.visible = true;
   }
+
+  hide() {
+    this.visible = false;
+    return this;
+  }
 }
