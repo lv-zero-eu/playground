@@ -4,6 +4,7 @@
   export let strokeWidth = 10; // Stroke width of the circle in pixels
   export let color = "#000000"; // Color of the circle
   export let foregroundColor = "#ffffff"; // Foreground color for the progress
+  export let showProgress = false;
 
   let radius;
   let circumference;
@@ -39,6 +40,15 @@
     stroke-dasharray={circumference}
     stroke-dashoffset={-progressOffset}
   />
+  {#if showProgress}
+    <text
+      class="progress-text"
+      x={size / 2}
+      y={size / 2 + 1}
+      text-anchor="middle"
+      dominant-baseline="middle">{progress}%</text
+    >
+  {/if}
 </svg>
 
 <style>
