@@ -14,7 +14,7 @@
   $: {
     radius = (size - strokeWidth) / 2;
     circumference = 2 * Math.PI * radius;
-    progressOffset = (circumference * (100 - progress)) / 100;
+    progressOffset = (circumference * progress) / 100;
   }
 </script>
 
@@ -27,18 +27,19 @@
     cx={size / 2}
     cy={size / 2}
     r={radius}
-    style={`stroke: ${color}; stroke-width: var(--circle-stroke-width);`}
+    style={`stroke: ${foregroundColor}; stroke-width: var(--circle-stroke-width);`}
   />
   <circle
     class="foreground"
     cx={size / 2}
     cy={size / 2}
     r={radius}
-    style={`stroke: ${foregroundColor}; stroke-width: var(--circle-stroke-width);`}
+    style={`stroke: ${color}; stroke-width: var(--circle-stroke-width);`}
     transform={`rotate(-90 ${size / 2} ${size / 2})`}
     stroke-dasharray={circumference}
     stroke-dashoffset={progressOffset}
   />
+
   {#if title}
     <text
       class="progress-title"
@@ -51,6 +52,7 @@
       {title}
     </text>
   {/if}
+
   {#if showProgress}
     <text
       class="progress-text"

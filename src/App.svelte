@@ -20,9 +20,10 @@
     {progress}
     size={50}
     strokeWidth={5}
-    color="green"
-    foregroundColor="red"
+    color="red"
+    foregroundColor="green"
     showProgress={true}
+    title="yes"
   />
 </main>
 
