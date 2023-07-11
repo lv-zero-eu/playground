@@ -5,6 +5,7 @@
   export let color = "#000000"; // Color of the circle
   export let foregroundColor = "#ffffff"; // Foreground color for the progress
   export let showProgress = false;
+  export let title = "";
 
   let radius;
   let circumference;
@@ -19,9 +20,7 @@
 
 <svg
   class="progress-circle"
-  width={size}
-  height={size}
-  style={`--circle-stroke-width: ${strokeWidth}px;`}
+  style={`--circle-size: ${size}px; --circle-stroke-width: ${strokeWidth}px;`}
 >
   <circle
     class="background"
@@ -38,16 +37,31 @@
     style={`stroke: ${foregroundColor}; stroke-width: var(--circle-stroke-width);`}
     transform={`rotate(-90 ${size / 2} ${size / 2})`}
     stroke-dasharray={circumference}
-    stroke-dashoffset={-progressOffset}
+    stroke-dashoffset={progressOffset}
   />
+  {#if title}
+    <text
+      class="progress-title"
+      x={size / 2}
+      y={size / 2 - size / 10}
+      text-anchor="middle"
+      dominant-baseline="middle"
+      style={`font-size: ${size / 3.8}px;`}
+    >
+      {title}
+    </text>
+  {/if}
   {#if showProgress}
     <text
       class="progress-text"
       x={size / 2}
-      y={size / 2 + 1}
+      y={size / 2 + (title ? size / 8 : 0) + 1}
       text-anchor="middle"
-      dominant-baseline="middle">{progress}%</text
+      dominant-baseline="middle"
+      style={`font-size: ${size / (title ? 5.2 : 4)}px;`}
     >
+      {progress}%
+    </text>
   {/if}
 </svg>
 
