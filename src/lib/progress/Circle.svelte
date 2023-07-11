@@ -57,10 +57,12 @@
     <text
       class="progress-text"
       x={size / 2}
-      y={size / 2 + (title ? size / 8 : 0) + 1}
+      y={size / 2 + (title ? size / 8 + 5 : 0 + 1)}
       text-anchor="middle"
       dominant-baseline="middle"
-      style={`font-size: ${size / (title ? 5.2 : 4)}px;`}
+      style={`font-size: ${size / (title ? 5.2 : 4)}px; font-weight: ${
+        title ? "undefined" : "bold"
+      };`}
     >
       {progress}%
     </text>
@@ -72,8 +74,10 @@
     fill: transparent;
     transition: stroke-dashoffset 0.3s linear;
   }
-
   .background {
     fill: transparent;
+  }
+  .progress-title {
+    font-weight: bold;
   }
 </style>

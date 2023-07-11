@@ -12,6 +12,7 @@ mnt`;
 
   let tree: Node = undefined;
   let newTree: string;
+  let xml;
 
   $: tree = parseToTree(treeText);
   $: newTree = tree
@@ -19,6 +20,8 @@ mnt`;
     .format()
     .sortChildren((n1, n2) => n1.name.localeCompare(n2.name), true)
     .toString();
+
+  $: xml = console.log(tree.toXML());
 </script>
 
 <div>

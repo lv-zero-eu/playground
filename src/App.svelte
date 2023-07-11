@@ -1,6 +1,6 @@
 <script lang="ts">
   import Tree from "./lib/Tree.svelte";
-  import NotificationView from "./lib/notification/NotificationView.svelte";
+  import Notification from "./lib/Notification.svelte";
   import Circle from "./lib/progress/Circle.svelte";
 
   let progress = 0;
@@ -14,11 +14,11 @@
 </script>
 
 <main>
+  <Notification />
   <Tree />
-  <NotificationView />
   <Circle
     {progress}
-    size={50}
+    size={150}
     strokeWidth={5}
     color="red"
     foregroundColor="green"

@@ -2,24 +2,9 @@
   import { fly } from "svelte/transition";
   import { Notification } from "./Notification";
 
-  let notifications: Notification[] = [];
-
-  function addNotification(message) {
-    const notification = new Notification(message);
-    notifications = [notification, ...notifications];
-
-    setTimeout(() => {
-      notification.visible = false;
-      setTimeout(() => {
-        notifications = notifications.filter((n) => n.id !== notification.id);
-      }, 300);
-    }, 5000);
-  }
+  export let notifications: Notification[] = [];
+  export let bg = "#f0f0f0;";
 </script>
-
-<button on:click={() => addNotification("Notification 1")}>
-  Add Notification
-</button>
 
 <div class="notifications">
   {#each notifications as notification (notification.id)}
@@ -27,6 +12,7 @@
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="notification"
+        style={`background-color: ${bg};`}
         transition:fly={{ x: 500, duration: 300 }}
         on:click={() => (notification = notification.hide())}
       >
@@ -48,7 +34,6 @@
     overflow: hidden;
   }
   .notification {
-    background-color: #f0f0f0;
     padding: 10px;
     border-radius: 4px;
   }
