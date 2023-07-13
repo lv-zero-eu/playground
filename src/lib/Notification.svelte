@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Notification } from "./notification/Notification";
+  import { Notification } from "./notification/notification";
   import NotificationView from "./notification/NotificationView.svelte";
 
   let notifications: Notification[] = [];

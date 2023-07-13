@@ -12,7 +12,6 @@ mnt`;
 
   let tree: Node = undefined;
   let newTree: string;
-  let xml;
 
   $: tree = parseToTree(treeText);
   $: newTree = tree
@@ -25,13 +24,23 @@ mnt`;
 <div>
   <h1>Folder Structure</h1>
   <textarea bind:value={treeText} placeholder="Enter indented text" />
-  <TreeView bind:tree />
-  <textarea name="" id="" cols="30" rows="10" bind:value={newTree} />
+  <div class="viewer">
+    <TreeView bind:tree />
+    <pre>{tree.toString()}</pre>
+    <pre>{newTree}</pre>
+  </div>
 </div>
 
 <style>
+  .viewer {
+    display: flex;
+    gap: 50px;
+  }
   div {
     padding: 0 5px;
+  }
+  pre {
+    margin: 0;
   }
 
   h1 {

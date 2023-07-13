@@ -1,68 +1,11 @@
 <script lang="ts">
   import Tree from "./lib/Tree.svelte";
   import Notification from "./lib/Notification.svelte";
-  import Circle from "./lib/progress/Circle.svelte";
-  import { onDestroy, onMount } from "svelte";
-
-  let progress = 0;
-  let antiProgress = 100;
-  let progressStatus = false;
-  let interval;
-
-  onMount(() => {
-    interval = setInterval(() => {
-      progress += !progressStatus ? 10 : -10;
-      antiProgress += !progressStatus ? -10 : +10;
-      progressStatus =
-        progress >= 100 || progress <= 0 ? !progressStatus : progressStatus;
-    }, 1000);
-  });
-
-  onDestroy(() => {
-    clearInterval(interval);
-  });
+  import CirclePreview from "./lib/Circle.svelte";
 </script>
 
 <main>
   <Notification />
   <Tree />
-  <Circle
-    {progress}
-    size={150}
-    strokeWidth={5}
-    color="red"
-    foregroundColor="green"
-    showProgress={true}
-    title="yes"
-  />
-  <Circle
-    progress={antiProgress}
-    size={150}
-    strokeWidth={5}
-    color="red"
-    foregroundColor="green"
-    showProgress={true}
-    title="yes"
-  />
-  <Circle
-    {progress}
-    size={200}
-    strokeWidth={8}
-    color="red"
-    foregroundColor="green"
-    showProgress={true}
-    title="yes"
-  />
-  <Circle
-    progress={antiProgress}
-    size={200}
-    strokeWidth={8}
-    color="red"
-    foregroundColor="green"
-    showProgress={true}
-    title="yes"
-  />
+  <CirclePreview />
 </main>
-
-<style>
-</style>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
-  import { Notification } from "./Notification";
+  import { Notification } from "./notification";
 
   export let notifications: Notification[] = [];
   export let bg = "#f0f0f0;";
