@@ -70,6 +70,10 @@
 </svg>
 
 <style>
+  svg {
+    width: var(--circle-size);
+    aspect-ratio: 1/1;
+  }
   .foreground {
     fill: transparent;
     transition: stroke-dashoffset 0.3s linear;
