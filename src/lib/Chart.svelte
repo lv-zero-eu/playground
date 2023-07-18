@@ -9,17 +9,24 @@
     { data: [0, 100, 180, 130, -0], color: "orange" },
   ];
 
-  let interval;
+  let enableInterval = false;
 
-  onMount(() => {
-    interval = setInterval(() => {
-      chartData[0].data[1] += 1;
-    }, 10);
-  });
+  let interval;
 
   onDestroy(() => {
     clearInterval(interval);
   });
+
+  $: {
+    if (!interval && enableInterval) {
+      interval = setInterval(() => {
+        chartData[0].data[0] += 1;
+      }, 10);
+    } else if (!enableInterval) {
+      clearInterval(interval);
+      interval = undefined;
+    }
+  }
 
   let fillArea = true; // Set to false if you don't want to fill the area
 </script>
@@ -29,5 +36,9 @@
   <label>
     <input type="checkbox" bind:checked={fillArea} /> Fill Area
   </label>
+  <label>
+    <input type="checkbox" bind:checked={enableInterval} /> Enable Interval
+  </label>
+  <br />
   <LinearChart {chartData} width={400} height={200} bind:fillArea />
 </main>
