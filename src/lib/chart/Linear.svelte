@@ -7,8 +7,8 @@
   export let fillArea = false;
 
   // Extract data and colors from the chartData array
-  let multiData = chartData.map((item) => item.data);
-  let lineColors = chartData.map((item) => item.color || "steelblue");
+  let multiData;
+  let lineColors;
 
   let multiDataPath;
 
@@ -16,6 +16,9 @@
   let xScale, yScale;
 
   $: {
+    multiData = chartData.map((item) => item.data);
+    lineColors = chartData.map((item) => item.color || "steelblue");
+
     xScale = (d) => (d * width) / (multiData[0].length - 1);
 
     const minData = Math.min(...multiData.flat());
