@@ -1,6 +1,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import Circle from "./progress/Circle.svelte";
+  import Pie from "./progress/Pie.svelte";
 
   let progress = 0;
   let antiProgress = 100;
@@ -41,19 +42,18 @@
 />
 <Circle
   {progress}
-  size={200}
+  size={250}
   strokeWidth={8}
   color="red"
   foregroundColor="green"
   showProgress={true}
   title="yes"
+  inverted={true}
 />
-<Circle
+<Pie
   progress={antiProgress}
-  size={200}
-  strokeWidth={8}
+  size={250}
   color="red"
-  foregroundColor="green"
   showProgress={true}
   title="yes"
 />
