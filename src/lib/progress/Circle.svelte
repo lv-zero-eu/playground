@@ -6,6 +6,7 @@
   export let foregroundColor = "#ffffff"; // Foreground color for the progress
   export let showProgress = false;
   export let title = "";
+  export let inverted = false;
 
   let radius;
   let circumference;
@@ -14,7 +15,7 @@
   $: {
     radius = (size - strokeWidth) / 2;
     circumference = 2 * Math.PI * radius;
-    progressOffset = (circumference * progress) / 100;
+    progressOffset = (circumference * ((inverted ? 100 : 0) + progress)) / 100;
   }
 </script>
 
