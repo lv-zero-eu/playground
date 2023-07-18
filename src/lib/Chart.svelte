@@ -29,5 +29,5 @@
   <label>
     <input type="checkbox" bind:checked={fillArea} /> Fill Area
   </label>
-  <LinearChart {chartData} width={400} height={200} fillArea />
+  <LinearChart {chartData} width={400} height={200} bind:fillArea />
 </main>
