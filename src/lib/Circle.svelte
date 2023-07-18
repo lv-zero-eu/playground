@@ -31,12 +31,11 @@
   showProgress={true}
   title="yes"
 />
-<Circle
+<Pie
   progress={antiProgress}
   size={150}
-  strokeWidth={5}
-  color="red"
-  foregroundColor="green"
+  color="green"
+  foregroundColor="red"
   showProgress={true}
   title="yes"
 />
