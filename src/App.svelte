@@ -3,11 +3,13 @@
   import Notification from "./lib/Notification.svelte";
   import CirclePreview from "./lib/Circle.svelte";
   import Chart from "./lib/Chart.svelte";
+  import Input from "./lib/Input.svelte";
 </script>
 
 <main>
-  <Notification />
+  <Input />
+  <!-- <Notification />
   <Chart />
   <Tree />
-  <CirclePreview />
+  <CirclePreview /> -->
 </main>
