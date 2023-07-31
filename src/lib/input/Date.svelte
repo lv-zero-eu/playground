@@ -1,7 +1,11 @@
 <script>
   export let startFromSunday = false;
   export let currentDate = new Date();
-  let showCalendar = true;
+  let showCalendar = false;
+
+  export let bg = "#fff";
+  export let bgButton = "#eeeeee";
+  export let bgSelected = "#eeeeee";
 
   function getFirstDayOfMonth(date) {
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -61,62 +65,86 @@
     if (startFromSunday) weekDays.unshift(weekDays.pop());
     return weekDays;
   }
-
 </script>
 
-<div class="selected-date" on:click={toggleCalendar}>
-  {currentDate.toLocaleDateString(undefined, {
-    weekday: "short",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })}
-</div>
-
-<div style={`display: ${showCalendar ? "block" : "none"}`} class="calendar">
-  <div class="days">
-    {#each getLocalizedDayNames() as dayName}
-      <div class="day">{dayName}</div>
-    {/each}
-
-    {#each Array(getFirstDayOfMonth(currentDate)).fill() as _, i}
-      <div class="day pre-month" />
-    {/each}
-
-    {#each Array(getDaysInMonth(currentDate))
-      .fill()
-      .map((_, i) => i + 1) as day}
-      <div
-        class="day {day === currentDate.getDate() &&
-        currentDate.getMonth() === new Date().getMonth()
-          ? 'current-day'
-          : ''}"
-        on:click={() => selectDate(day)}
-      >
-        {day}
-      </div>
-    {/each}
+<div class="container">
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div class="selected-date" on:click={toggleCalendar}>
+    {currentDate.toLocaleDateString(undefined, {
+      weekday: "short",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })}
   </div>
 
-  <div class="navigation">
-    <button class="arrow" on:click={prevMonth}>&#8249;</button>
-    <span
-      >{currentDate.toLocaleString("default", {
-        month: "long",
-        year: "numeric",
-      })}</span
-    >
-    <button class="arrow" on:click={nextMonth}>&#8250;</button>
+  <div
+    style={`display: ${showCalendar ? "block" : "none"}; background: ${bg}`}
+    class="calendar"
+  >
+    <div class="days">
+      {#each getLocalizedDayNames() as dayName}
+        <div class="day dayOfTheWeek">{dayName}</div>
+      {/each}
+
+      {#each Array(getFirstDayOfMonth(currentDate)).fill() as _, i}
+        <div class="day pre-month" />
+      {/each}
+
+      {#each Array(getDaysInMonth(currentDate))
+        .fill()
+        .map((_, i) => i + 1) as day}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div
+          style={`${
+            day === currentDate.getDate() ? "background: " + bgSelected : ""
+          }`}
+          class="day current-month {day === currentDate.getDate() &&
+          currentDate.getMonth() === new Date().getMonth()
+            ? 'current-day'
+            : ''}"
+          on:click={() => selectDate(day)}
+        >
+          {day}
+        </div>
+      {/each}
+    </div>
+
+    <div class="navigation">
+      <button
+        style={`background-color: ${bgButton};`}
+        class="arrow"
+        on:click={prevMonth}>&#8249;</button
+      >
+      <span
+        >{currentDate.toLocaleString("default", {
+          month: "long",
+          year: "numeric",
+        })}</span
+      >
+      <button
+        style={`background-color: ${bgButton};`}
+        class="arrow"
+        on:click={nextMonth}>&#8250;</button
+      >
+    </div>
   </div>
 </div>
 
 <style>
+  .container {
+    position: relative;
+  }
+
   .calendar {
+    position: absolute;
     border-radius: 12px;
     border: 1px #eeeeee solid;
-    margin-top: 5px;
+    margin-top: 3px;
     width: fit-content;
+    z-index: 2;
   }
+
   .days {
     display: grid;
     grid-template-columns: repeat(7, 20px);
@@ -131,14 +159,9 @@
     font-size: 10px;
     border-radius: 50%;
   }
-
-  .day:hover:not(.pre-month) {
+  .current-month:hover {
     background-color: #eeeeee;
     cursor: pointer;
-  }
-
-  .current-day {
-    background-color: #eeeeee;
   }
 
   .selected-date {
@@ -165,7 +188,6 @@
     border: none;
     height: 20px;
     aspect-ratio: 1;
-    background-color: #eeeeee;
     cursor: pointer;
     font-size: 14px;
     border-radius: 50%;
