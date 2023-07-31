@@ -10,6 +10,10 @@
 </label>
 
 <style>
+  label{
+    width: fit-content;
+    height: 25px;
+  }
   .switch {
     display: inline-block;
     width: 45px;

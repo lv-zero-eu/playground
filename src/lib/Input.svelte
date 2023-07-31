@@ -5,7 +5,11 @@
 </script>
 
 <main>
-  <Date bg={"var(--bg)"} bgButton={"var(--bg-box)"} bgSelected={"var(--bg-box)"}/>
+  <Date
+    bg={"var(--bg)"}
+    bgButton={"var(--bg-box)"}
+    bgSelected={"var(--bg-box)"}
+  />
   <Switch />
   <Number />
 </main>
@@ -17,5 +21,6 @@
     padding: 0.5px;
     display: flex;
     flex-direction: column;
+    gap: 5px;
   }
 </style>
