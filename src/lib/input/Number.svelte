@@ -39,7 +39,6 @@
     align-items: center;
     max-width: fit-content;
     height: 25px;
-    background-color: #eeeeee;
     border-radius: 15px;
     position: relative;
     min-width: 45px;
