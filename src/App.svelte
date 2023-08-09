@@ -4,11 +4,13 @@
   import CirclePreview from "./lib/Circle.svelte";
   import Chart from "./lib/Chart.svelte";
   import Input from "./lib/Input.svelte";
+  import Logo from "./lib/logo/Logo.svelte";
 </script>
 
 <main>
-  <Input />
+  <Logo />
   <!-- <Notification />
+  <Input />
   <Chart />
   <Tree />
   <CirclePreview /> -->
