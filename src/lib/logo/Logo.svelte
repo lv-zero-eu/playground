@@ -43,6 +43,7 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
+    animation: rotation 4s normal forwards;
   }
   .circle {
     border: 5px solid white;
@@ -57,15 +58,58 @@
     bottom: -130px;
     left: -250px;
     fill: rgba(255, 255, 255, 0.15);
+    animation: wave1 4s normal;
+    animation-fill-mode: forwards;
   }
   .wave-2 {
     fill: rgba(196, 201, 250, 0.5);
     top: -75px;
     left: -300px;
+    animation: wave2 4s normal;
+    animation-fill-mode: forwards;
+    transform: translate(-130px, -130px);
   }
   .wave-3 {
     bottom: -20px;
     left: -60px;
     fill: white;
+    animation: wave3 4s normal;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes rotation {
+    from {
+      rotate: 1turn;
+    }
+    to {
+      rotate: 0;
+    }
+  }
+
+  @keyframes wave1 {
+    from {
+      transform: translate(250px, 0);
+    }
+    to {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes wave3 {
+    from {
+      transform: translate(-140px, 0);
+    }
+    to {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes wave2 {
+    from {
+      transform: translate(-130px, -130px);
+    }
+    to {
+      transform: translate(0, 0);
+    }
   }
 </style>
