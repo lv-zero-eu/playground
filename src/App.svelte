@@ -5,7 +5,7 @@
   import Chart from "./lib/Chart.svelte";
   import Input from "./lib/Input.svelte";
   import Logo from "./lib/logo/Logo.svelte";
-  import Nav from "./stories/Nav/Nav.svelte";
+  import Nav from "./lib/Nav.svelte";
 </script>
 
 <main>
