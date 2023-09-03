@@ -19,12 +19,18 @@
 <div class="number-picker">
   <input bind:value class="value" {min} {max} type="number" />
   <div class="arrows">
-    <div class="arrow" on:click={increaseValue}>&#9650;</div>
-    <div class="arrow" on:click={decreaseValue}>&#9660;</div>
+    <button class="arrow" tabindex="0" on:click={increaseValue}>&#9650;</button>
+    <button class="arrow" tabindex="0" on:click={decreaseValue}>&#9660;</button>
   </div>
 </div>
 
 <style>
+  button {
+    background: inherit;
+    border: inherit;
+    margin: 0;
+  }
+
   input::-webkit-outer-spin-button, /* Chrome, Safari, Edge, Opera */
   input::-webkit-inner-spin-button, /* Chrome, Safari, Edge, Opera */
   input[type="number"]  /* Firefox */ {
