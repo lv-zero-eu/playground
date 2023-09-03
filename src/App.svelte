@@ -5,13 +5,19 @@
   import Chart from "./lib/Chart.svelte";
   import Input from "./lib/Input.svelte";
   import Logo from "./lib/logo/Logo.svelte";
+  import Nav from "./stories/Nav/Nav.svelte";
 </script>
 
 <main>
-  <Logo />
-  <!-- <Notification />
-  <Input />
+  <Nav />
+  <h1>qsdqsdqdq</h1>
+  <!-- 
+  <Table />
   <Chart />
+  <Notification />
+  <Logo />
+  <Input />
   <Tree />
-  <CirclePreview /> -->
+  <CirclePreview /> 
+  -->
 </main>
